@@ -90,3 +90,19 @@ end
 def customer_can_afford_pet(customer, new_pet)
   return customer_cash(customer) >= pet_cost(new_pet)
 end
+
+def sell_pet_to_customer(pet_shop, pet, customer)
+  if pet != nil
+    #p "found pet"
+    if customer_can_afford_pet(customer, pet)
+      #p "can afford"
+      pet_cost = pet_cost(pet)
+      #p pet_cost
+      remove_customer_cash(customer, pet_cost)
+      add_or_remove_cash(pet_shop, pet_cost)
+      add_pet_to_customer(customer, pet)
+      remove_pet_by_name(pet_shop, pet)
+      increase_pets_sold(pet_shop, 1)
+    end
+  end
+end
