@@ -137,6 +137,12 @@ class TestPetShop < Minitest::Test
     assert_nil(pet)
   end
 
+  def test_remove_pet_by_name__no_match
+    pet_count_before = @pet_shop[:pets].length
+    remove_pet_by_name(@pet_shop, "Bob")
+    assert_equal(pet_count_before, @pet_shop[:pets].length)
+  end
+
   def test_add_pet_to_stock
     add_pet_to_stock(@pet_shop, @new_pet)
     count = stock_count(@pet_shop)
